@@ -1,0 +1,259 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="dark-background">
+    <ul class="nav nav-pills justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Dashboard</a>
+        </li>
+      </ul>
+
+<div class="container">
+
+    <div class="alert alert-danger display-portrait alert-dismissible mt-" role="alert">
+        Please rotate your phone to landscape orientation for a better viewing experience.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+        <span aria-hidden="true">&times;</span>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 mt-3">
+
+            <div class="col-lg-12">
+                <div class="lead text-center mb-3">Confirmed Cases</div>
+                {{map_html|safe}}
+            </div>
+            <div class="col-lg-12 mt-3">
+                <div class="lead text-center mb-3">Total Deaths</div>
+                {{death_html|safe}}
+            </div>
+
+            <div class="col-lg-12 mt-3">
+                <div class="lead text-center mb-3">Total Recovered</div>
+                {{recovered_html|safe}}
+            </div>
+    
+        </div>
+
+        
+
+        <div class="col-lg-4 col-lg-offset-1 mt-3">
+
+            <div class="element-dark data-container ">
+
+                <h3 class="text-center">Stats in Oman</h3>
+                <p class="lead light mb-4 text-center">Last updated : {{dou}} at {{tou}}</p>
+                <p>Total Confirmed Cases : <span class="yellow">{{confirmed}}</span></p>
+                <p>Total Deaths : <span class="red">{{deaths}}</span></p>
+                <p class="mb-5">Total Recovered : <span class="green">{{recovered1}}</span></p>
+
+                <p class="mt-4">Confirmed Cases Today : <span class="yellow">{{new_confirmed}}</span></p>
+                <p>Deaths Today : <span class="red">{{new_deaths}}</span></p>
+                <p class="mb-5">Recovered Today : <span class="green">{{new_recovered}}</span></p>
+
+            </div>
+
+            <div class="graph-container element-dark mt-3 ">
+
+                <h3 class="text-center mb-3 lead p-2 ">Top 4 COVID affected countries</h3>
+                <canvas id="top3graph"></canvas>
+    
+            </div>
+
+            <div class="graph-container element-dark mt-3">
+
+                <h3 class="text-center mb-3 lead p-2">Oman compared to the rest of the world</h3>
+                <canvas id="worldgraph" class="pb-3"></canvas>
+    
+            </div>
+
+        </div>
+
+
+        
+    </div>
+
+
+    <div class="gcc element-dark mt-5">
+
+        <h2 class="text-center pt-3 heading">COVID spread in the GCC</h2>
+        <canvas id="gcc" class="chart-item"></canvas>
+
+    </div>
+
+    <div class="Oman-trend element-dark mt-5">
+
+        <h2 class="text-center pt-3 heading">COVID spread in Oman</h2>
+        <canvas id="oman" class="chart-item"></canvas>
+
+    </div>
+
+    <div class="alert alert-success display-portrait alert-dismissible mt-5" role="alert">
+        Hover or click the plots to view corresponsding data
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> 
+        <span aria-hidden="true">&times;</span>
+    </div>
+    <div class="Multiline element-dark mt-5">
+
+        <h2 class="text-center pt-3 heading">Recovery Rates</h2>
+
+        <canvas id="multi-line" class="chart-item"></canvas>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script type="text/javascript">
+
+
+    //top3graph
+
+    var ctx = document.getElementById('top3graph').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: {{countries_top3 | safe}},
+            datasets: [{
+                label: 'Confirmed Cases',
+                backgroundColor: 'rgb(150, 0, 32)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: {{cases_top3 | safe}}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    //Rest of the world
+
+    r = Math.floor(Math.random() * 200);
+    g = Math.floor(Math.random() * 200);
+    b = Math.floor(Math.random() * 200);
+    color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+
+
+    var ctx1 = document.getElementById('worldgraph').getContext('2d');
+    var chart1 = new Chart(ctx1, {
+        // The type of chart we want to create
+        type: 'pie',
+
+        // The data for our dataset
+        data: {
+            labels: ['Oman', 'Rest of the world'],
+            datasets: [{
+                label: 'My First dataset',
+                backgroundColor: ["#c4670a", "#960020"],
+                borderColor: 'rgb(0, 0, 0)',
+                data: [{{confirmed | safe}}, 961538]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    //GCC
+
+
+    var ctx2 = document.getElementById('gcc').getContext('2d');
+    var chart2 = new Chart(ctx2, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: {{gcc_names | safe}},
+            datasets: [{
+                label: ['Confirmed Cases'],
+                backgroundColor: ["#960020", "#960020", "#960020","#960020","#960020","#c4670a"],
+                borderColor: 'rgb(0, 0, 0)',
+                data: {{gcc_cases | safe}}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    // Oman
+
+    var ctx3 = document.getElementById('oman').getContext('2d');
+    var chart3 = new Chart(ctx3, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {{dates|safe}},
+            datasets: [{
+                label: 'Confirmed Cases',
+                backgroundColor: '#c4670a',
+                borderColor: 'rgb(0, 0, 0)',
+                data: {{cases|safe}}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+
+    //Multi_Line Chart
+
+    
+     var ctx4 = document.getElementById('multi-line').getContext('2d');
+    var chart4 = new Chart(ctx4, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {{dates|safe}},
+            datasets: [{
+                label: 'Oman (%)',
+                fill: false,
+                borderColor: '#d1111a',
+                data: {{oman_recovery|safe}}
+            },{
+                label: 'China (%)',
+                fill: false,
+                borderColor: '#00b53c',
+                data: {{china_recovery|safe}}
+            },{
+                label: 'Spain (%)',
+                fill: false,
+                borderColor: '#03009e',
+                data: {{spain_recovery|safe}}
+            },{
+                label: 'US (%)',
+                fill: false,
+                borderColor: '#fff419',
+                data: {{us_recovery|safe}}
+            },{
+                label: 'Italy (%)',
+                fill: false,
+                borderColor: '#550163',
+                data: {{italy_recovery|safe}}
+            },{
+                label: 'UAE (%)',
+                fill: false,
+                borderColor: '#c4670a',
+                data: {{uae_recovery|safe}}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+        
+</script>
+
+{%endblock%}

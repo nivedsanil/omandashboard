@@ -1,0 +1,244 @@
+html, body {
+    height: 100%;
+    color: white;
+    /* background-color:#121212; */
+    font-family: 'Sen', sans-serif;
+}
+
+.dark-background{
+
+    background-color:#121212;
+}
+
+hr{
+    border-color: white;
+}
+
+.display-4{
+
+    color: red;
+    font-weight: 700;
+}
+.element-dark{
+
+    background-color:rgba(30, 30, 30, 0.8);
+    
+}
+
+.jumbotron{
+
+    padding: 100px;
+    border-radius: 10px;;
+    z-index: 2;
+}
+
+.typewrite{
+
+    font-size: 20px;
+}
+
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #121212;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    z-index: 1;
+  }
+
+/* Nav Item CSS  */
+
+.nav{
+
+    padding:30px 0px;
+}
+
+/* iframe css  */
+
+iframe{
+
+    width: 600px;
+    height: 300px;
+}
+
+.recovered{
+
+    
+}
+
+/* Data Container */
+
+.data-container{
+
+    padding: 30px;
+}
+
+.location{
+    
+    background-color:rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.location-container{
+
+    height: 500px;
+    overflow: scroll;
+}
+
+/* Charts */
+
+.chart-item{
+
+    width: 300px;
+    height: auto;
+
+}
+
+
+#myChart{
+        
+    width: 900px;
+    height: auto;
+}
+
+.input-container{
+
+    padding: 30px;
+}
+
+.display-portrait{
+
+    display: none;
+}
+
+.display-landscape{
+
+    display: none;
+}
+
+.red{
+
+    color: red;
+}
+
+.green{
+
+    color: green;
+}
+
+.oman{
+
+    position: relative;
+    top: -15px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.yellow{
+
+    color: yellow;
+}
+
+.light{
+
+    font-size: 12px!important;
+    color: rgba(255, 255, 255, 0.4)!important;
+}
+  @media screen and (max-width: 1024px) {
+
+    
+}
+
+
+  @media screen and (max-width: 950px) {
+
+    .display-landscape{
+
+        display: block;
+    }
+
+   
+ 
+    
+}
+
+
+  @media screen and (max-width: 650px) {
+
+    iframe{
+
+        width: 300px;
+        height: 300px;
+    }
+    
+    .display-landscape{
+
+        display: none;
+    }
+    
+    .display-portrait{
+
+        display: block;
+    }
+
+    .chartpadding{
+
+        padding: 20px;
+    }
+    #myChart{
+        
+        width: 300px;
+        height: auto;
+    }
+
+    .heading{
+
+        font-size: 20px!important;
+    }
+
+  
+  }
+
+
+
+  @media screen and (max-width: 480px) {
+
+    .jumbotron{
+
+        padding: 30px;
+    }
+
+    /* .jumbotron{
+
+        position: absolute;
+        top: 200px;
+        left: 38px;
+        padding: 30px;
+    } */
+    
+}
+
+@media screen and (max-width: 480px) {
+
+    /* .jumbotron{
+
+        position: absolute;
+        top: 120px;
+        left: 20px;
+        padding: 30px;
+    }
+     */
+}
+
+@media screen and (max-width: 380px) {
+
+    
+}
+
+
+
