@@ -75,16 +75,11 @@ def stats(request):
             gcc_cases.append(top[i]['TotalConfirmed'])
 
     # -------- Oman Trend --------
-
     url = "https://api.covid19api.com/country/Oman/status/confirmed/live"
 
-    payload = []
-    headers= []
-
-    response = requests.request("GET", url, headers=headers, data = payload)
-
+    response = requests.request("GET", url)
     line_dict=response.json()
-    
+
     dates=[]
     cases=[]
 
@@ -97,8 +92,8 @@ def stats(request):
 
         if(i==(len(line_dict)-1)):
 
-           dou=date[0]
-           tou=date[1]
+            dou=date[0]
+            tou=date[1]
 # ------- Multi Line Trend Charts --------- #
 
     trendurl="https://pomber.github.io/covid19/timeseries.json"
@@ -148,7 +143,6 @@ def stats(request):
     #     countrydate.append(values[0][i]['date'])
 
 
-
     oman_recovery=recovery[indices[0]]
     uae_recovery=recovery[indices[1]]
     spain_recovery=recovery[indices[2]]
@@ -156,6 +150,30 @@ def stats(request):
     italy_recovery=recovery[indices[4]]
     us_recovery=recovery[indices[5]]
 
+    # ----- Growth Chart -------
+
+    # gcc=['Saudi Arabia', 'Kuwait', 'United Arab Emirates', 'Qatar', 'Bahrain', 'Oman']
+    gcc_indices=[]
+
+    for i in range(0,6):   
+        if gcc[i] in countries:  
+            gcc_indices.append(countries.index(gcc[i]))
+
+    Saudi_growth=[]
+    Kuwait_growth=[]
+    UAE_growth=[]
+    Qatar_growth=[]
+    Bahrain_growth=[]
+    Oman_growth=[]
+
+    for i in range(0, len(values[12])):
+        
+        Saudi_growth.append(values[gcc_indices[0]][i]['confirmed'])
+        Kuwait_growth.append(values[gcc_indices[1]][i]['confirmed'])
+        UAE_growth.append(values[gcc_indices[2]][i]['confirmed'])
+        Qatar_growth.append(values[gcc_indices[3]][i]['confirmed'])
+        Bahrain_growth.append(values[gcc_indices[4]][i]['confirmed'])
+        Oman_growth.append(values[gcc_indices[5]][i]['confirmed'])
 
     # ------- Choropleths --------#
 
@@ -249,6 +267,12 @@ def stats(request):
         'china_recovery':china_recovery, 
         'italy_recovery':italy_recovery,
         'us_recovery':us_recovery, 
+        'Saudi_growth':Saudi_growth,
+        'Kuwait_growth':Kuwait_growth,
+        'UAE_growth':UAE_growth,
+        'Bahrain_growth':Bahrain_growth,
+        'Qatar_growth':Qatar_growth,
+        'Oman_growth':Oman_growth,
         'dou':dou, 
         'tou':tou
         

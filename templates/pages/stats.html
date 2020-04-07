@@ -102,6 +102,14 @@
 
     </div>
 
+    <div class="gccGrowth element-dark mt-5">
+
+        <h2 class="text-center pt-3 heading">Growth Trend in the GCC</h2>
+
+        <canvas id="growth" class="chart-item"></canvas>
+
+    </div>
+
 </div>
 
 
@@ -209,7 +217,7 @@
     //Multi_Line Chart
 
     
-     var ctx4 = document.getElementById('multi-line').getContext('2d');
+    var ctx4 = document.getElementById('multi-line').getContext('2d');
     var chart4 = new Chart(ctx4, {
         // The type of chart we want to create
         type: 'line',
@@ -247,6 +255,51 @@
                 fill: false,
                 borderColor: '#c4670a',
                 data: {{uae_recovery|safe}}
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+
+    var ctx5 = document.getElementById('growth').getContext('2d');
+    var chart5 = new Chart(ctx5, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {{dates|safe}},
+            datasets: [{
+                label: 'Saudi Arabia',
+                fill: false,
+                borderColor: '#d1111a',
+                data: {{Saudi_growth|safe}}
+            },{
+                label: 'Kuwait',
+                fill: false,
+                borderColor: '#00b53c',
+                data: {{Kuwait_growth|safe}}
+            },{
+                label: 'UAE',
+                fill: false,
+                borderColor: '#03009e',
+                data: {{UAE_growth|safe}}
+            },{
+                label: 'Qatar',
+                fill: false,
+                borderColor: '#fff419',
+                data: {{Qatar_growth|safe}}
+            },{
+                label: 'Bahrain',
+                fill: false,
+                borderColor: '#550163',
+                data: {{Bahrain_growth|safe}}
+            },{
+                label: 'Oman',
+                fill: false,
+                borderColor: '#c4670a',
+                data: {{Oman_growth|safe}}
             }]
         },
 
