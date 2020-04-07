@@ -26,6 +26,7 @@ def stats(request):
     df.to_csv('covid_data3.csv', index=False)
 
     covid_data=pd.read_csv('covid_data3.csv')
+    confirmed_cases=covid_data['TotalConfirmed'].sum()
 
     # --------- Oman Total Cases ---------
 
@@ -249,6 +250,7 @@ def stats(request):
         'map_html':map_html,
         'death_html':death_html,
         'recovered_html':recovered_html,
+        'confirmed_cases':confirmed_cases,
         'confirmed':confirmed,
         'deaths':deaths,
         'recovered1':recovered1,

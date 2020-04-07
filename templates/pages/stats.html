@@ -160,7 +160,7 @@
                 label: 'My First dataset',
                 backgroundColor: ["#c4670a", "#960020"],
                 borderColor: 'rgb(0, 0, 0)',
-                data: [{{confirmed | safe}}, 961538]
+                data: [{{confirmed | safe}}, {{confirmed_cases | safe}}]
             }]
         },
 
@@ -228,7 +228,7 @@
             datasets: [{
                 label: 'Oman (%)',
                 fill: false,
-                borderColor: '#d1111a',
+                borderColor: '#c4670a',
                 data: {{oman_recovery|safe}}
             },{
                 label: 'China (%)',
@@ -253,7 +253,7 @@
             },{
                 label: 'UAE (%)',
                 fill: false,
-                borderColor: '#c4670a',
+                borderColor: '#d1111a',
                 data: {{uae_recovery|safe}}
             }]
         },
